@@ -1,32 +1,48 @@
 import "./App.css";
-
+import React, { useState } from "react";
+import TodoTable from "./component/TodoTable";
+import NewTodoForm from "./component/NewTodoForm";
 function App() {
+  // const todos = [
+  //   { rowNumber: 1, rowDescription: "Feed dog", rowAssign: "Eric" },
+  //   { rowNumber: 2, rowDescription: "Water Plant", rowAssign: "User Two" },
+  //   { rowNumber: 3, rowDescription: "Make Food", rowAssign: "User One" },
+  //   { rowNumber: 4, rowDescription: "Charge Mobile", rowAssign: "User Two" },
+  // ];
+
+  const [todos, setTodos] = useState([
+    { rowNumber: 1, rowDescription: "Feed dog", rowAssign: "Eric" },
+    { rowNumber: 2, rowDescription: "Water Plant", rowAssign: "User Two" },
+    { rowNumber: 3, rowDescription: "Make Food", rowAssign: "User One" },
+    { rowNumber: 4, rowDescription: "Charge Mobile", rowAssign: "User Two" },
+  ]);
+
+  // const todoAdd = () => {
+  //   console.log("btn clicked");
+  // };
+
+  const addTodo = (description, assigned) => {
+    if (todos.length > 0) {
+      const newTodo = {
+        rowNumber: todos.length + 1,
+        rowDescription: description,
+        rowAssign: assigned
+      };
+      setTodos((todos) => [...todos, newTodo]);
+      //todos.push(newTodo);
+      console.log(todos);
+    }
+  };
   return (
     <div className="mt-5 container">
       <div className="card">
         <div className="card-header">Your Todo's</div>
         <div className="card-body">
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Description</th>
-                <th scope="col">Assign</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Feed Dog</td>
-                <td>Eric</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Get haircut</td>
-                <td>Eric</td>
-              </tr>
-            </tbody>
-          </table>
+          <TodoTable todos={todos} />
+          <button className="btn btn-primary" onClick={addTodo}>
+            Add Todos
+          </button>
+          <NewTodoForm addTodo={addTodo} />
         </div>
       </div>
     </div>
