@@ -1,4 +1,6 @@
 import TodoRowItem from "./TodoRowItem";
+
+
 function TodoTable(props) {
   return (
     <>
@@ -12,12 +14,13 @@ function TodoTable(props) {
         </thead>
         <tbody>
           {/* use Map for automatically render each element of todos  */}
-
           {props.todos.map((todo) => (
             <TodoRowItem
+              key={todo.rowNumber}
               rowNumber={todo.rowNumber}
               rowDescription={todo.rowDescription}
               rowAssign={todo.rowAssign}
+              deleteTodo={props.deleteTodo}
             />
           ))}
           {/* <tr>
